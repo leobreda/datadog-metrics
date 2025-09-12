@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    mem_limit: 256m
+    cpu_count: 1
+    build:
+      context: ./
+    container_name: metrics-app
+    depends_on:
+      - datadog
+    environment:
+      - DD_SERVICE=metrics-app
+      - DD_ENV=dev
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "csharp", "service": "metrics-app"}]'
+    restart: unless-stopped
