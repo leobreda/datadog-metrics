@@ -8,7 +8,7 @@ namespace ConsoleMetrics
         {
             var config = new StatsdConfig
             {
-                StatsdServerName = "192.168.1.224", // ou o IP do container, se não estiver em host network
+                StatsdServerName = "127.0.0.1", // ou o IP do container, se não estiver em host network
                 StatsdPort = 8125
             };
 
