@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  datadog:
+    mem_limit: 256m
+    image: gcr.io/datadoghq/agent:latest
+    container_name: datadog-agent
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE=datadoghq.com
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_APM_ENABLED=true
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+    ports:
+      - "8125:8125/udp"                # DogStatsD
+      - "8126:8126"                    # APM
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    restart: unless-stopped
+
+  app:
+    mem_limit: 256m
+    cpu_count: 1
+    build:
+      context: ./ConsoleMetrics
+    container_name: metrics-app
+    depends_on:
+      - datadog
+    environment:
+      - DD_SERVICE=metrics-app
+      - DD_ENV=dev
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "csharp", "service": "metrics-app"}]'
+    restart: unless-stopped
