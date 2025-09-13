@@ -4,7 +4,7 @@ services:
   datadog:
     mem_limit: 256m
     image: gcr.io/datadoghq/agent:latest
-    container_name: datadog-agent
+    container_name: datadog-agent-a
     environment:
       - DD_API_KEY=${DD_API_KEY}
       - DD_SITE=datadoghq.com
