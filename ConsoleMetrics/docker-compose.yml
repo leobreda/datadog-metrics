@@ -6,7 +6,9 @@ services:
     cpu_count: 1
     build:
       context: ./
-    container_name: metrics-app-a
+    container_name: metrics-app
+    depends_on:
+      - datadog
     environment:
       - DD_SERVICE=metrics-app
       - DD_ENV=dev
