@@ -25,12 +25,9 @@ namespace ConsoleMetrics
 
                 var histograma = 5;
 
-                var cpu = new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total");
-                
-                var cpuUsage = cpu.NextValue();
+                var random = new Random();
 
                 string[] tags = new[] { "environment:dev" };
-
 
                 int i = 0;
                 while (true)
@@ -47,8 +44,7 @@ namespace ConsoleMetrics
 
                     dogStatsdService.Histogram("net.leobreda.histogram", histograma,1, tags);
 
-                    cpuUsage = cpu.NextValue();
-                    dogStatsdService.Gauge("net.leobreda.cpu", cpuUsage,1, tags);
+                    dogStatsdService.Gauge("net.leobreda.cpu", random.Next(30, 95), 1, tags);
 
                     Console.Write(".");
                     System.Threading.Thread.Sleep(1000);
