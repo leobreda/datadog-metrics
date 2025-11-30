@@ -8,7 +8,7 @@ namespace ConsoleMetrics
         {
             var config = new StatsdConfig
             {
-                StatsdServerName = "127.0.0.1", // ou o IP do container, se não estiver em host network
+                StatsdServerName = "192.168.1.224", // ou o IP do container, se não estiver em host network
                 StatsdPort = 8125
             };
 
@@ -27,18 +27,21 @@ namespace ConsoleMetrics
                 var cpu = new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total");
                 var cpuUsage = cpu.NextValue();
 
+                //o performancecounter nao funciona no Linux
+
+
 
                 while (true)
                 {
-                    dogStatsdService.Increment("net.leobreda.increment", incremento, tags: new[] { "environment:dev" });
-                    dogStatsdService.Decrement("net.leobreda.decrement", decremento, tags: new[] { "environment:dev" });
-                    dogStatsdService.Counter("net.leobreda.counter", quantidade, tags: new[] { "environment:dev" });
-                    dogStatsdService.Histogram("net.leobreda.histogram", histograma, tags: new[] { "environment:dev" });
+                    dogStatsdService.Increment("net.leobreda.increment", 2, tags: new[] { "ambiente:prod" });
+                    dogStatsdService.Decrement("net.leobreda.decrement", decremento, tags: new[] { "ambiente:prod" });
+                    dogStatsdService.Counter("net.leobreda.counter", quantidade, tags: new[] { "ambiente:prod" });
+                    dogStatsdService.Histogram("net.leobreda.histogram", histograma, tags: new[] { "ambiente:prod" });
 
                     cpuUsage = cpu.NextValue();
-                    dogStatsdService.Gauge("net.leobreda.cpu", cpuUsage, tags: new[] { "environment:dev" });
+                    dogStatsdService.Gauge("net.leobreda.cpu", cpuUsage, tags: new[] { "ambiente:prod" });
 
-                    Console.Write(".");
+                    Console.WriteLine(".");
                     System.Threading.Thread.Sleep(1000);
                 }
             }

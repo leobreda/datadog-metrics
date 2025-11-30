@@ -25,21 +25,29 @@ $> echo $DD_API_KEY
 c:\> echo %DD_API_KEY%
 ```
 
-## Provisionando o Datadog agent via Docker
+<!-- ## Provisionando o Datadog agent via Docker
 ```
 cd datadog-agent
-docker-compose up
+docker-compose up --build
 ```
 
 ## Provisionando a aplicação via Docker
 ```
 cd ConsoleMetrics
-docker-compose up
+docker-compose up --build
+``` -->
+
+## Provisionando o Datadog agent + aplicação
+```
+docker-compose up --build
 ```
 O console deverá escrever um ponto "." a cada 1 segundo, indicando a gravação das métricas no Datadog.
 
+---
 
-## Provisionando o Datadog agent + aplicação em um único container Docker
- ```
-docker-compose up //compila o docker-compose.yml do diretório "datadog-metrics"
+
+
+Problemas ao rodar docker-compose?
+```
+docker system prune -a
 ```
