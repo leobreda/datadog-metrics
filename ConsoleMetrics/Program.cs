@@ -40,7 +40,7 @@ namespace ConsoleMetrics
 
                     dogStatsdService.Decrement("net.leobreda.decrement", i, 1, tags);
 
-                    dogStatsdService.Distribution("net.leobreda.distribuition", i, 1, tags);
+                    dogStatsdService.Distribution("net.leobreda.distribution", i, 1, tags);
 
                     dogStatsdService.Histogram("net.leobreda.histogram", histograma,1, tags);
 
