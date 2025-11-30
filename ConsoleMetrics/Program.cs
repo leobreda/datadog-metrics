@@ -51,6 +51,8 @@ namespace ConsoleMetrics
 
                     if (i % 10 == 0)
                         Console.WriteLine($"{i}s ...");
+
+                    dogStatsdService.Flush();
                 }
             }
         }
