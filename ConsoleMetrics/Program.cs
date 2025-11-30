@@ -13,8 +13,8 @@ namespace ConsoleMetrics
             };
 
             //Apontando pro container, ao rodar no Visual Studio
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                config.StatsdServerName = "192.168.0.224";
+            // if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            //     config.StatsdServerName = "192.168.0.2";
             
 
             Console.WriteLine("Hello, World!\n");
